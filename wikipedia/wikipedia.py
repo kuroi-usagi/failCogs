@@ -27,7 +27,7 @@ class Wikipedia:
         """
         Set wikipedia domain and language
         """
-        valid_domains = ['de', 'en']
+        valid_domains = ['da', 'de', 'en', 'fr', 'hr', 'it', 'nl', 'ru', 'tr']
 
         if domain in valid_domains:
             self.settings['domain'] = domain
