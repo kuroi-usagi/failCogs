@@ -24,7 +24,7 @@ class Wikipedia:
     @wikiconfig.command(name="set", pass_context=True)
     async def _set_wikiconfig(self, ctx, domain: str):
         """Set your wikipedia domain."""
-
+        
         valid_domains = ['de', 'en']
 
         if domain in valid_domains:
