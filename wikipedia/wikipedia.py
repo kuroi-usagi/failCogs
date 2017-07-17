@@ -16,11 +16,17 @@ class Wikipedia:
 
     @commands.group(name="wikiconfig", pass_context=True)
     async def wikiconfig(self, ctx):
+        """
+        Configure wikipedia plugin
+        """
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
     @wikiconfig.command(name="set", pass_context=True)
     async def _set_wikiconfig(self, ctx, domain: str):
+        """
+        Set wikipedia domain and language
+        """
         valid_domains = ['de', 'en']
 
         if domain in valid_domains:
