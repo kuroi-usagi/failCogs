@@ -2,13 +2,38 @@ import aiohttp
 import discord
 from discord.ext import commands
 
+from .utils.dataIO import dataIO
+
 
 class Wikipedia:
     """
-    Le Wikipedia Cog
+    The Wikipedia Cog
     """
     def __init__(self, bot):
         self.bot = bot
+        self.settings_path = "data/wikipedia/settings.json"
+        self.settings = dataIO.load_json(self.settings_path)
+
+    @commands.group(name="wikiconfig", pass_context=True)
+    async def wikiconfig(self, ctx):
+        """Change your wikipedia domain.""""
+
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @wikiconfig.command(name="set", pass_context=True)
+    async def _set_wikiconfig(self, ctx, domain: str):
+        """Set your wikipedia domain.""""
+
+        valid_domains = ['de', 'en']
+
+        if domain in valid_domains:
+            self.settings['domain'] = domain
+            dataIO.save_json(self.settings_path, self.settings)
+            await self.bot.say("Your domain has been set.")
+        else:
+            await self.bot.say("Invalid domain. Please choose one of these domains " + valid_domains)
+
 
     @commands.command(pass_context=True, name='wikipedia', aliases=['wiki', 'w'])
     async def _wikipedia(self, context, *, query: str):
@@ -16,7 +41,10 @@ class Wikipedia:
         Get information from Wikipedia
         """
         try:
-            url = 'https://de.wikipedia.org/w/api.php?'
+            if self.settings['domain'] is None:
+                await self.bot.say("Please set your wikipedia domain.")
+            domain = self.settings['domain']
+            url = 'https://'+domain+'.wikipedia.org/w/api.php?'
             payload = {}
             payload['action'] = 'query'
             payload['format'] = 'json'
