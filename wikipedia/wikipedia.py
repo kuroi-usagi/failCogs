@@ -34,7 +34,7 @@ class Wikipedia:
             dataIO.save_json(self.settings_path, self.settings)
             await self.bot.say("Your domain has been set.")
         else:
-            await self.bot.say("Invalid domain. Please choose one of these domains " + valid_domains)
+            await self.bot.say("Invalid domain. Please choose one of these domains " + str(valid_domains))
 
 
     @commands.command(pass_context=True, name='wikipedia', aliases=['wiki', 'w'])
