@@ -52,6 +52,8 @@ class Wikipedia:
             domain = self.settings['domain']
             if domain is "":
                 await self.bot.say("Please set your wikipedia domain.")
+                return
+                
             url = 'https://'+domain+'.wikipedia.org/w/api.php?'
             payload = {}
             payload['action'] = 'query'
