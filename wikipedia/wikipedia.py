@@ -49,9 +49,9 @@ class Wikipedia:
         Get information from Wikipedia
         """
         try:
-            if self.settings['domain'] is None:
-                await self.bot.say("Please set your wikipedia domain.")
             domain = self.settings['domain']
+            if domain is None:
+                await self.bot.say("Please set your wikipedia domain.")
             url = 'https://'+domain+'.wikipedia.org/w/api.php?'
             payload = {}
             payload['action'] = 'query'
