@@ -50,7 +50,8 @@ class Wikipedia:
         """
         try:
             domain = self.settings['domain']
-            if domain is None:
+            print(domain)
+            if domain is "":
                 await self.bot.say("Please set your wikipedia domain.")
             url = 'https://'+domain+'.wikipedia.org/w/api.php?'
             payload = {}
