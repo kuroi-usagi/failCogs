@@ -50,7 +50,6 @@ class Wikipedia:
         """
         try:
             domain = self.settings['domain']
-            print(domain)
             if domain is "":
                 await self.bot.say("Please set your wikipedia domain.")
             url = 'https://'+domain+'.wikipedia.org/w/api.php?'
@@ -88,7 +87,7 @@ class Wikipedia:
             os.makedirs(self.settings_folder)
 
     def check_files(self):
-        default = {'domain': {}}
+        default = {'domain': ''}
         if not dataIO.is_valid_json(self.settings_path):
             print("Creating default wikipedia settings.json...")
             dataIO.save_json(self.settings_path, default)
