@@ -29,6 +29,7 @@ class Wikipedia:
             await send_cmd_help(ctx)
 
     @wikiconfig.command(name="set", pass_context=True)
+    @checks.is_owner()
     async def _set_wikiconfig(self, ctx, domain: str):
         """
         Set wikipedia domain and language
@@ -53,7 +54,7 @@ class Wikipedia:
             if domain is "":
                 await self.bot.say("Please set your wikipedia domain.")
                 return
-                
+
             url = 'https://'+domain+'.wikipedia.org/w/api.php?'
             payload = {}
             payload['action'] = 'query'
