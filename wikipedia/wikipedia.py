@@ -80,12 +80,12 @@ class Wikipedia:
             message = 'Something went terribly wrong! [{}]'.format(e)
             await self.bot.say('```{}```'.format(message))
 
-    def check_folders(self, ctx):
+    def check_folders(self):
         if not os.path.exists(self.settings_folder):
             print("Creating {} folder...".format(self.settings_folder))
             os.makedirs(self.settings_folder)
 
-    def check_files(self, ctx):
+    def check_files(self):
         default = {'domain': {}}
         if not dataIO.is_valid_json(self.settings_path):
             print("Creating default wikipedia settings.json...")
