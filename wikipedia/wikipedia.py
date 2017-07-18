@@ -11,7 +11,12 @@ class Wikipedia:
     """
     def __init__(self, bot):
         self.bot = bot
-        self.settings_path = "data/wikipedia/settings.json"
+        self.settings_folder = "data/wikipedia"
+        self.settings_path = self.settings_folder + "/settings.json"
+
+        self.check_folders()
+        self.check_files()
+
         self.settings = dataIO.load_json(self.settings_path)
 
     @commands.group(name="wikiconfig", pass_context=True)
@@ -75,6 +80,16 @@ class Wikipedia:
             message = 'Something went terribly wrong! [{}]'.format(e)
             await self.bot.say('```{}```'.format(message))
 
+    def check_folders():
+        if not os.path.exists(self.settings_folder):
+            print("Creating {} folder...".format(self.settings_folder))
+            os.makedirs(self.settings_folder)
+
+    def check_files():
+        default = {'domain': {}}
+        if not dataIO.is_valid_json(self.settings_path):
+            print("Creating default wikipedia settings.json...")
+            dataIO.save_json(self.settings_path, default)
 
 def setup(bot):
     n = Wikipedia(bot)
