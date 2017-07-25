@@ -76,7 +76,7 @@ class Dates:
         if self._delete_date(server.id, date, time):
             await self.bot.say("Termin gelöscht.")
 
-     def _delete_date(self,serverId, date, time):
+    def _delete_date(self,serverId, date, time):
         print("deleting date entry")
         deletedState = False
         if serverId in self.dates:
