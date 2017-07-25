@@ -106,7 +106,10 @@ class Dates:
                             print(date_datetime)
                             if datetime.datetime.now() > date_datetime:
                                 print("delete all the things!")
-                                await self._delete_date(serverId, date, time)
+                                print(serverId)
+                                print(date)
+                                print(time)
+                                #await self._delete_date(serverId, date, time)
                         except ValueError:
                             print("ERROR in cleanup")
 
