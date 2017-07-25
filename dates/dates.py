@@ -47,7 +47,7 @@ def check_folders():
 def check_files():
     f = "data/dates/dates.json"
     if not dataIO.is_valid_json(f):
-        print("Creating data/dates/dates.json...)
+        print("Creating data/dates/dates.json...")
         dataIO.save_json(f, {})
 
 def setup(bot):
