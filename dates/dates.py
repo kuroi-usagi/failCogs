@@ -96,13 +96,13 @@ class Dates:
                     print(date)
                     for time in self.dates[serverId][date]:
                         print(time)
-                        date_string += date + " " + time
-                        date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
-                        now_datetime = datetime.datetime.now()
-                        print(now_datetime)
-                        print(date_datetime)
-                        if now_datetime > date_datetime:
-                            self.bot.say("Termin abgelaufen")
+                        #date_string += date + " " + time
+                        #date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
+                        #now_datetime = datetime.datetime.now()
+                        #print(now_datetime)
+                        #print(date_datetime)
+                        #if now_datetime > date_datetime:
+                        #    self.bot.say("Termin abgelaufen")
 
     def checkDateTime(self, date, time):
         try:
