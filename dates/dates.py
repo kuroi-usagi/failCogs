@@ -99,19 +99,18 @@ class Dates:
             for serverId in self.dates:
                 for date in self.dates[serverId]:
                     for time in self.dates[serverId][date]:
-                        try:
-                            date_string = date + " " + time
-                            date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
-                            print(date_string)
-                            print(date_datetime)
-                            if datetime.datetime.now() > date_datetime:
-                                print("delete all the things!")
-                                print(serverId)
-                                print(date)
-                                print(time)
-                                #await self._delete_date(serverId, date, time)
-                        except ValueError:
-                            print("ERROR in cleanup")
+                        #try:
+                        date_datetime = datetime.datetime.strptime(date + " " + time, '%d.%m.%y %H:%M')
+                        print(date_string)
+                        print(date_datetime)
+                        if datetime.datetime.now() > date_datetime:
+                            print("delete all the things!")
+                            print(serverId)
+                            print(date)
+                            print(time)
+                            await self._delete_date(serverId, date, time)
+                        #except ValueError:
+                        #    print("ERROR in cleanup")
 
     def checkDateTime(self, date, time):
         try:
