@@ -50,7 +50,7 @@ class Dates:
 
         server = ctx.message.server
         dates = self.dates[server.id]
-        embed = discord.RichEmbed(title="Termine", color = 0x00c9f4)
+        embed = discord.Embed(title="Termine", color = 0x00c9f4)
         embed.setTimestamp()
         datetext = ""
         for date in dates:
