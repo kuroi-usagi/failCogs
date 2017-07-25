@@ -54,5 +54,5 @@ def check_files():
 def setup(bot):
     check_folders()
     check_files()
-    n = ReactPoll(bot)
+    n = Dates(bot)
     bot.add_cog(n)
