@@ -74,19 +74,36 @@ class Dates:
             return
 
         server = ctx.message.server
-        if server.id in self.dates:
+        if self._delete_date(server.id, date, time):
+            await self.bot.say("Termin gelöscht.")
+
+        #if server.id in self.dates:
+        #    if date in self.dates[server.id]:
+        #        if time in self.dates[server.id][date]:
+        #            del self.dates[server.id][date][time]
+
+        #if not self.dates[server.id][date]:
+        #    del self.dates[server.id][date]
+
+
+
+
+    async def _delete_date(self,serverId: str, date: str, time: str):
+        deletedState = False
+        if serverId in self.dates:
             if date in self.dates[server.id]:
                 if time in self.dates[server.id][date]:
                     del self.dates[server.id][date][time]
-                    await self.bot.say("Termin gelöscht.")
-
+                    deletedState = True
         if not self.dates[server.id][date]:
             del self.dates[server.id][date]
 
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
-    async def cleanup(self):
+        return deletedState
+
+    async def _cleanup(self):
         while True:
             await asyncio.sleep(5)
             print("cleanup should now run")
@@ -99,7 +116,7 @@ class Dates:
                             print(date_string)
                             print(date_datetime)
                             if datetime.datetime.now() > date_datetime:
-                                print("Termin abgelaufen")
+                                self._delete_date(serverId, date, time)
                         except:
                             print("ERROR in cleanup")
 
