@@ -97,11 +97,9 @@ class Dates:
                             date_string = date + " " + time
                             date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
                             print(date_string)
-                            now_datetime = datetime.datetime.now()
-                            print(now_datetime)
                             print(date_datetime)
-                            if now_datetime > date_datetime:
-                                self.bot.say("Termin abgelaufen")
+                            if datetime.datetime.now() > date_datetime:
+                                print("Termin abgelaufen")
                         except:
                             print("ERROR in cleanup")
 
