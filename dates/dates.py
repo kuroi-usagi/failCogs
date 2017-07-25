@@ -48,8 +48,11 @@ class Dates:
 
         server = ctx.message.server
         dates = self.dates[server.id]
+        embed = discord.Embed(title="Termine")
         for date in dates:
-            print(date)
+            embed.add_field(text=self.dates[server.id][date])
+        await self.bot.edit_message(message, new_content=" ", embed=embed)
+
 
 
 def check_folders():
