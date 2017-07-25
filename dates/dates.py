@@ -17,7 +17,7 @@ class Dates:
 
     @commands.group(name="termin", pass_context=True)
     async def date(self, ctx):
-    """ Verwaltet Termine fürs Team"""
+        """ Verwaltet Termine fürs Team"""
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
@@ -34,7 +34,7 @@ class Dates:
     async def _list_dates(self, ctx):
         server = ctx.message.server
         dates = self.dates[server]
-        
+
 
 def check_folders():
     if not os.path.exists()"data/dates"):
