@@ -42,10 +42,9 @@ class Dates:
         dates = self.dates[server.id]
         embed = discord.Embed(title="Termine")
         for date in dates:
-            header = self.dates[server.id][date]
-            for time in header:
-                print(time)
-                datetext = "*" + self.dates[server.id][date][time] + "*"
+            header = date
+            for time in self.dates[server.id][date]:
+                datetext = time + "*" + self.dates[server.id][date][time] + "*"
                 embed.add_field(name=header, value=datetext)
         await self.bot.say(embed=embed)
 
