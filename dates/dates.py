@@ -26,7 +26,7 @@ class Dates:
     @date.command(name="neu", pass_context=True)
     async def _new_date(self, ctx, date: str, time: str, note: str):
         """Erstelle einen neuen Termin.
-        Format: dd.mm.yy hh:mm"""
+        Format: dd.mm.yy hh:mm Beschreibung"""
 
         if not self.checkDateTime(date, time):
             print("checking datetime")
