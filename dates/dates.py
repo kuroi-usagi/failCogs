@@ -94,7 +94,7 @@ class Dates:
                 print(serverId)
                 for date in self.dates[serverId]:
                     print(date)
-                    for time in self.dates[server.id][date]:
+                    for time in self.dates[serverId][date]:
                         print(time)
                         date_string += date + " " + time
                         date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
