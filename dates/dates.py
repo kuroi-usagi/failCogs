@@ -77,14 +77,6 @@ class Dates:
         if await self._delete_date(server.id, date, time):
             await self.bot.say("Termin gelöscht.")
 
-        #if server.id in self.dates:
-        #    if date in self.dates[server.id]:
-        #        if time in self.dates[server.id][date]:
-        #            del self.dates[server.id][date][time]
-
-        #if not self.dates[server.id][date]:
-        #    del self.dates[server.id][date]
-
     async def _delete_date(self,serverId, date, time):
         print("deleting date entry")
         deletedState = False
@@ -113,7 +105,8 @@ class Dates:
                             date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
                             print(date_string)
                             print(date_datetime)
-                            #if datetime.datetime.now() > date_datetime:
+                            if datetime.datetime.now() > date_datetime:
+                                print("delete all the things!")
                                 #await self._delete_date(serverId, date, time)
                         except ValueError:
                             print("ERROR in cleanup")
