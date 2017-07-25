@@ -89,12 +89,12 @@ class Dates:
         print("deleting date entry")
         deletedState = False
         if serverId in self.dates:
-            if date in self.dates[server.id]:
-                if time in self.dates[server.id][date]:
-                    del self.dates[server.id][date][time]
+            if date in self.dates[serverId]:
+                if time in self.dates[serverId][date]:
+                    del self.dates[serverId][date][time]
                     deletedState = True
-        if not self.dates[server.id][date]:
-            del self.dates[server.id][date]
+        if not self.dates[serverId][date]:
+            del self.dates[serverId][date]
 
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
