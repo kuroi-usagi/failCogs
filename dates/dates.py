@@ -113,7 +113,7 @@ class Dates:
                             print(date_string)
                             print(date_datetime)
                             if datetime.datetime.now() > date_datetime:
-                                self._delete_date(serverId, date, time)
+                                await self._delete_date(serverId, date, time)
                         except ValueError:
                             print("ERROR in cleanup")
 
