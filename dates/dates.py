@@ -91,18 +91,19 @@ class Dates:
             await asyncio.sleep(5)
             print("cleanup should now run")
             for serverId in self.dates:
-                print(serverId)
                 for date in self.dates[serverId]:
-                    print(date)
                     for time in self.dates[serverId][date]:
-                        print(time)
-                        #date_string += date + " " + time
-                        #date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
-                        #now_datetime = datetime.datetime.now()
-                        #print(now_datetime)
-                        #print(date_datetime)
-                        #if now_datetime > date_datetime:
-                        #    self.bot.say("Termin abgelaufen")
+                        try:
+                            date_string += date + " " + time
+                            date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
+                            print(date_string)
+                            #now_datetime = datetime.datetime.now()
+                            #print(now_datetime)
+                            #print(date_datetime)
+                            #if now_datetime > date_datetime:
+                            #    self.bot.say("Termin abgelaufen")
+                        except:
+                            print("ERROR in cleanup")
 
     def checkDateTime(self, date, time):
         try:
