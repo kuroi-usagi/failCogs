@@ -113,8 +113,8 @@ class Dates:
                             date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
                             print(date_string)
                             print(date_datetime)
-                            if datetime.datetime.now() > date_datetime:
-                                await self._delete_date(serverId, date, time)
+                            #if datetime.datetime.now() > date_datetime:
+                                #await self._delete_date(serverId, date, time)
                         except ValueError:
                             print("ERROR in cleanup")
 
