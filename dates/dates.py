@@ -15,7 +15,7 @@ class Dates:
         self.bot = bot
         self.dates_path = "data/dates/dates.json"
         self.dates = dataIO.load_json(self.dates_path)
-        self.cleanup_task = bot.loop.create_task(self.cleanup())
+        self.cleanup_task = bot.loop.create_task(self._cleanup())
 
     def __unload(self):
         self.cleanup_task.cancel()
