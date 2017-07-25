@@ -21,14 +21,6 @@ class Dates:
         """ Verwaltet Termine fürs Team"""
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
-    @date.command(name="aktivieren", pass_context=True)
-    async def _activate(self, ctx):
-        """Aktiviere die Terminverwaltung für diesen Server."""
-
-        server = ctx.message.server
-        if server.id not in self.dates:
-            self.dates[server.id] = {}
-            dataIO.save_json(self.dates_path, self.dates)
 
     @date.command(name="neu", pass_context=True)
     async def _new_date(self, ctx, date: str, time: str, note: str):
@@ -52,6 +44,7 @@ class Dates:
         for date in dates:
             header = self.dates[server.id][date]
             for time in date:
+                print(time)
                 datetext = "*" + self.dates[server.id][date][time] + "*"
                 embed.add_field(name=header, value=datetext)
         await self.bot.say(embed=embed)
