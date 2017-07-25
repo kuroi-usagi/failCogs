@@ -38,7 +38,7 @@ class Dates:
         server = ctx.message.server
         self.dates[server.id] = {}
         self.dates[server.id][date] = {}
-        self.dates[server.id][date][time] = newDate
+        self.dates[server.id][date][time] = note
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
@@ -54,7 +54,6 @@ class Dates:
             for time in date:
                 datetext = "*" + self.dates[server.id][date][time] + "*"
                 embed.add_field(name=header, value=datetext)
-                print(self.dates[server.id][date])
         await self.bot.say(embed=embed)
 
 
