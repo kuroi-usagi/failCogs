@@ -17,6 +17,9 @@ class Dates:
         self.dates = dataIO.load_json(self.dates_path)
         self.cleanup_task = bot.loop.create_task(self.cleanup())
 
+    def __unload(self):
+        self.cleanup_task.cancel()
+        log.debug('Stopped cleanup task')
 
     @commands.group(name="termin", pass_context=True)
     async def date(self, ctx):
@@ -94,6 +97,8 @@ class Dates:
                     date_string += date + " " + time
                     date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
                     now_datetime = datetime.datetime.now()
+                    print(now_datetime)
+                    print(date_datetime)
                     if now_datetime > date_datetime:
                         self.bot.say("Termin abgelaufen")
 
