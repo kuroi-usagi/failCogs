@@ -2,6 +2,7 @@ import discord
 import asyncio
 import re
 import os
+import datetime
 from discord.ext import commands
 from .utils.dataIO import dataIO
 from __main__ import send_cmd_help
@@ -25,6 +26,10 @@ class Dates:
     @date.command(name="neu", pass_context=True)
     async def _new_date(self, ctx, date: str, time: str, note: str):
         """Erstelle einen neuen Termin."""
+
+        if not self.checkDateTime(date, time):
+            await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
+            return
 
         newDate = (date, time, note)
         server = ctx.message.server
@@ -57,6 +62,10 @@ class Dates:
     async def _del_date(self, ctx, date: str, time: str):
         """Lösche einen Termin mit angegebenem Datum und Uhrzeit."""
 
+        if not self.checkDateTime(date, time):
+            await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
+            return
+            
         server = ctx.message.server
         if server.id in self.dates:
             if date in self.dates[server.id]:
@@ -70,6 +79,13 @@ class Dates:
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
+    async def checkDateTime(date, time):
+        try:
+            datetimestring = date + " " + time
+            datetime.datetime.strptime(datetimestring, '%d.%m.%y %H:%M')
+            return True
+        except ValueError:
+            return False
 
 def check_folders():
     if not os.path.exists("data/dates"):
