@@ -90,8 +90,8 @@ class Dates:
         while True:
             await asyncio.sleep(5)
             print("cleanup should now run")
-            dates = self.dates[server.id]
-            for serverId in dates:
+            for serverId in self.dates:
+                print(serverId)
                 for date in self.dates[serverId]:
                     print(date)
                     for time in self.dates[server.id][date]:
