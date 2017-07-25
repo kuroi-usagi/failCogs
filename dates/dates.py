@@ -86,7 +86,7 @@ class Dates:
         #    del self.dates[server.id][date]
 
     async def _delete_date(self,serverId, date, time):
-        log.debug("deleting date entry")
+        print("deleting date entry")
         deletedState = False
         if serverId in self.dates:
             if date in self.dates[server.id]:
