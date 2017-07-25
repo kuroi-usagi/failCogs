@@ -79,16 +79,16 @@ class Dates:
     async def _delete_date(self,serverId, date, time):
         print("deleting date entry")
         deletedState = False
-        if serverId in self.dates:
-            if date in self.dates[serverId]:
-                if time in self.dates[serverId][date]:
-                    del self.dates[serverId][date][time]
-                    deletedState = True
-        if not self.dates[serverId][date]:
-            del self.dates[serverId][date]
-
-        dataIO.save_json(self.dates_path, self.dates)
-        self.dates = dataIO.load_json(self.dates_path)
+        # if serverId in self.dates:
+        #     if date in self.dates[serverId]:
+        #         if time in self.dates[serverId][date]:
+        #             del self.dates[serverId][date][time]
+        #             deletedState = True
+        # if not self.dates[serverId][date]:
+        #     del self.dates[serverId][date]
+        #
+        # dataIO.save_json(self.dates_path, self.dates)
+        # self.dates = dataIO.load_json(self.dates_path)
 
         return deletedState
 
