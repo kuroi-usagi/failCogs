@@ -65,7 +65,7 @@ class Dates:
         if not self.checkDateTime(date, time):
             await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
             return
-            
+
         server = ctx.message.server
         if server.id in self.dates:
             if date in self.dates[server.id]:
@@ -79,7 +79,7 @@ class Dates:
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
-    async def checkDateTime(date, time):
+    async def checkDateTime(self, date, time):
         try:
             datetimestring = date + " " + time
             datetime.datetime.strptime(datetimestring, '%d.%m.%y %H:%M')
