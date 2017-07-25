@@ -26,7 +26,8 @@ class Dates:
         """Erstelle einen neuen Termin"""
         newDate = (date, time, note)
         server = ctx.message.server
-        self.dates[server][] = newDate
+        datetime = date+time
+        self.dates[server][datetime] = newDate
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
@@ -34,6 +35,8 @@ class Dates:
     async def _list_dates(self, ctx):
         server = ctx.message.server
         dates = self.dates[server]
+        for date in dates:
+            print(date)
 
 
 def check_folders():
