@@ -28,14 +28,15 @@ class Dates:
         newDate = (date, time, note)
         server = ctx.message.server
         datetime = date+time
-        self.dates[server][datetime] = newDate
+        print(datetime)
+        self.dates[server.id][datetime] = newDate
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
     @date.command(name="liste", pass_context=True)
     async def _list_dates(self, ctx):
         server = ctx.message.server
-        dates = self.dates[server]
+        dates = self.dates[server.id]
         for date in dates:
             print(date)
 
