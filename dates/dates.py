@@ -97,9 +97,13 @@ class Dates:
             await asyncio.sleep(5)
             print("cleanup should now run")
             for serverId in self.dates:
+                print(serverId)
                 for date in self.dates[serverId]:
+                    print(date)
                     for time in self.dates[serverId][date]:
-                        date_datetime = datetime.datetime.strptime(date + " " + time, '%d.%m.%y %H:%M')
+                        print(time)
+                        date_time_string = date + " " + time
+                        date_datetime = datetime.datetime.strptime(date_time_string, '%d.%m.%y %H:%M')
                         print(date_string)
                         print(date_datetime)
                         if datetime.datetime.now() > date_datetime:
