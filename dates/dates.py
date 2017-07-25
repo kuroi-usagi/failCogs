@@ -91,13 +91,14 @@ class Dates:
             print("error when deleting stuff")
         else:
             dataIO.save_json(self.dates_path, self.dates)
-            #self.dates = dataIO.load_json(self.dates_path)
+            self.dates = dataIO.load_json(self.dates_path)
 
         return deletedState
 
     async def cleanup(self):
         while True:
             await asyncio.sleep(5)
+            delete_dates = []
             print("cleanup should now run")
             for serverId in self.dates:
                 print(serverId)
@@ -110,11 +111,9 @@ class Dates:
                         print(date_time_string)
                         print(date_datetime)
                         if datetime.datetime.now() > date_datetime:
-                            print("delete all the things!")
-                            print(serverId)
-                            print(date)
-                            print(time)
-                            await self._delete_date(serverId, date, time)
+                            delete_dates.append((serverId, date, time))
+            for deleteItems in delete_dates:
+                await _delete_date(deleteItems[0], deleteItems[1], deleteItems[2])
 
     def checkDateTime(self, date, time):
         try:
