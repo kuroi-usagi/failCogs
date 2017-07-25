@@ -74,7 +74,7 @@ class Dates:
             return
 
         server = ctx.message.server
-        if self._delete_date(server.id, date, time):
+        if await self._delete_date(server.id, date, time):
             await self.bot.say("Termin gelöscht.")
 
         #if server.id in self.dates:
