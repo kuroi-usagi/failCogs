@@ -87,11 +87,12 @@ class Dates:
                         deletedState = True
             if not self.dates[serverId][date]:
                 del self.dates[serverId][date]
-
-            dataIO.save_json(self.dates_path, self.dates)
-            self.dates = dataIO.load_json(self.dates_path)
         except:
             print("error when deleting stuff")
+        else:
+            dataIO.save_json(self.dates_path, self.dates)
+            self.dates = dataIO.load_json(self.dates_path)
+
         return deletedState
 
     async def cleanup(self):
