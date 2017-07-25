@@ -91,7 +91,7 @@ class Dates:
             print("error when deleting stuff")
         else:
             dataIO.save_json(self.dates_path, self.dates)
-            self.dates = dataIO.load_json(self.dates_path)
+            #self.dates = dataIO.load_json(self.dates_path)
 
         return deletedState
 
