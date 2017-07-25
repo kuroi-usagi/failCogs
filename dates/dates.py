@@ -28,7 +28,7 @@ class Dates:
         server = ctx.message.server
         if server.id not in self.dates:
             self.dates[server.id] = {}
-            dataIO.save_json(self_dates_path, self.dates)
+            dataIO.save_json(self.dates_path, self.dates)
 
     @date.command(name="neu", pass_context=True)
     async def _new_date(self, ctx, date: str, time: str, note: str):
