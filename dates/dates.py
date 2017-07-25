@@ -32,7 +32,6 @@ class Dates:
         Format: dd.mm.yy hh:mm Beschreibung"""
 
         if not self.checkDateTime(date, time):
-            print("checking datetime")
             await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
             return
 
@@ -79,7 +78,6 @@ class Dates:
     async def _delete_date(self,serverId, date, time):
         deletedState = False
         try:
-            print("deleting date entry")
             if serverId in self.dates:
                 if date in self.dates[serverId]:
                     if time in self.dates[serverId][date]:
@@ -97,19 +95,13 @@ class Dates:
 
     async def cleanup(self):
         while True:
-            await asyncio.sleep(5)
+            await asyncio.sleep(360)
             delete_dates = []
-            print("cleanup should now run")
             for serverId in self.dates:
-                print(serverId)
                 for date in self.dates[serverId]:
-                    print(date)
                     for time in self.dates[serverId][date]:
-                        print(time)
                         date_time_string = date + " " + time
                         date_datetime = datetime.datetime.strptime(date_time_string, '%d.%m.%y %H:%M')
-                        print(date_time_string)
-                        print(date_datetime)
                         if datetime.datetime.now() > date_datetime:
                             delete_dates.append((serverId, date, time))
             for deleteItems in delete_dates:
@@ -118,7 +110,6 @@ class Dates:
     def checkDateTime(self, date, time):
         try:
             datetimestring = date + " " + time
-            print(datetimestring)
             datetime.datetime.strptime(datetimestring, '%d.%m.%y %H:%M')
             return True
         except ValueError:
