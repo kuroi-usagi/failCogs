@@ -36,9 +36,7 @@ class Dates:
 
         newDate = (date, time, note)
         server = ctx.message.server
-        datetime = date+time
-        print(datetime)
-        self.dates[server.id][datetime] = newDate
+        self.dates[server.id][date][time] = newDate
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
@@ -50,10 +48,11 @@ class Dates:
         dates = self.dates[server.id]
         embed = discord.Embed(title="Termine")
         for date in dates:
-            header = self.dates[server.id][date][0]
-            datetext = "*" + self.dates[server.id][date][1] + "* - " + self.dates[server.id][date][2]
-            embed.add_field(name=header, value=datetext)
-            print(self.dates[server.id][date])
+            for time in date:
+                header = self.dates[server.id][date][time][0]
+                datetext = "*" + self.dates[server.id][date][time][2] + "*"
+                embed.add_field(name=header, value=datetext)
+                print(self.dates[server.id][date])
         await self.bot.say(embed=embed)
 
 
