@@ -44,11 +44,12 @@ class Dates:
         server = ctx.message.server
         dates = self.dates[server.id]
         embed = discord.Embed(title="Termine", color = 0x00c9f4)
+        datetext = ""
         for date in dates:
             header = date
             for time in self.dates[server.id][date]:
-                datetext = "*" + time + "* - " + self.dates[server.id][date][time]
-                embed.add_field(name=header, value=datetext)
+                datetext += "*" + time + "* - " + self.dates[server.id][date][time] + "\n"
+            embed.add_field(name=header, value=datetext)
         await self.bot.say(embed=embed)
 
     @date.command(name="löschen", pass_context=True)
