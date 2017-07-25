@@ -113,7 +113,7 @@ class Dates:
                         if datetime.datetime.now() > date_datetime:
                             delete_dates.append((serverId, date, time))
             for deleteItems in delete_dates:
-                await _delete_date(deleteItems[0], deleteItems[1], deleteItems[2])
+                await self._delete_date(deleteItems[0], deleteItems[1], deleteItems[2])
 
     def checkDateTime(self, date, time):
         try:
