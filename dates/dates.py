@@ -19,7 +19,6 @@ class Dates:
 
     def __unload(self):
         self.cleanup_task.cancel()
-        log.debug('Stopped cleanup task')
 
     @commands.group(name="termin", pass_context=True)
     async def date(self, ctx):
@@ -107,7 +106,7 @@ class Dates:
                             print(date_datetime)
                             if datetime.datetime.now() > date_datetime:
                                 print("delete all the things!")
-                                #await self._delete_date(serverId, date, time)
+                                await self._delete_date(serverId, date, time)
                         except ValueError:
                             print("ERROR in cleanup")
 
