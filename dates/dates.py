@@ -94,7 +94,7 @@ class Dates:
                 for date in self.dates[serverId]:
                     for time in self.dates[serverId][date]:
                         try:
-                            date_string += date + " " + time
+                            date_string = date + " " + time
                             date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
                             print(date_string)
                             #now_datetime = datetime.datetime.now()
