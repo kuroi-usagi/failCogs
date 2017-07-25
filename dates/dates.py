@@ -52,7 +52,7 @@ class Dates:
         for date in dates:
             header = self.dates[server.id][date][0]
             datetext = "*" + self.dates[server.id][date][1] + "* - " + self.dates[server.id][date][2]
-            embed.add_field(name=header, value=self.dates[server.id][date])
+            embed.add_field(name=header, value=datetext)
             print(self.dates[server.id][date])
         await self.bot.say(embed=embed)
 
