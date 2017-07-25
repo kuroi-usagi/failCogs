@@ -59,6 +59,10 @@ class Dates:
             if date in self.dates[server.id]:
                 if time in self.dates[server.id][date]:
                     del self.dates[server.id][date][time]
+                    
+        if not self.dates[server.id][date]:
+            del self.dates[server.id][date]
+
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
