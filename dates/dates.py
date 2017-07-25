@@ -21,10 +21,19 @@ class Dates:
         """ Verwaltet Termine fürs Team"""
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
+    @date.command(name="aktivieren", pass_context=True)
+    async def _activate(self, ctx):
+        """Aktiviere die Terminverwaltung für diesen Server."""
+
+        server = ctx.message.server
+        if server.id not in serlf.dates:
+            self.dates[server.id] = {}
+            dataIO.save_json(self_dates_path, self.dates)
 
     @date.command(name="neu", pass_context=True)
     async def _new_date(self, ctx, date: str, time: str, note: str):
-        """Erstelle einen neuen Termin"""
+        """Erstelle einen neuen Termin."""
+
         newDate = (date, time, note)
         server = ctx.message.server
         datetime = date+time
@@ -35,6 +44,8 @@ class Dates:
 
     @date.command(name="liste", pass_context=True)
     async def _list_dates(self, ctx):
+        """Listet alle Termine auf."""
+        
         server = ctx.message.server
         dates = self.dates[server.id]
         for date in dates:
