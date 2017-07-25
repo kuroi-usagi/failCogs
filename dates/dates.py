@@ -26,7 +26,7 @@ class Dates:
         """Aktiviere die Terminverwaltung für diesen Server."""
 
         server = ctx.message.server
-        if server.id not in serlf.dates:
+        if server.id not in self.dates:
             self.dates[server.id] = {}
             dataIO.save_json(self_dates_path, self.dates)
 
@@ -45,7 +45,7 @@ class Dates:
     @date.command(name="liste", pass_context=True)
     async def _list_dates(self, ctx):
         """Listet alle Termine auf."""
-        
+
         server = ctx.message.server
         dates = self.dates[server.id]
         for date in dates:
