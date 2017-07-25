@@ -50,6 +50,19 @@ class Dates:
                 embed.add_field(name=header, value=datetext)
         await self.bot.say(embed=embed)
 
+    @date.command(name="löschen", pass_context=True)
+    async def _del_date(self, ctx, date: str, time: str):
+        """Lösche einen Termin mit angegebenem Datum und Uhrzeit."""
+
+        server = ctx.message.server
+        if server.id in self.dates:
+            if date in self.dates[server.id]:
+                if time in self.dates[server.id][date]:
+                    self.dates[server.id][date][time] = {}
+        dataIO.save_json(self.dates_path, self.dates)
+        self.dates = dataIO.load_json(self.dates_path)
+
+
 def check_folders():
     if not os.path.exists("data/dates"):
         print("Creating data/dates directory...")
