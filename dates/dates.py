@@ -67,7 +67,6 @@ class Dates:
 
         if not self.checkDateTime(date, time):
             await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
-            await
             return
 
         server = ctx.message.server
