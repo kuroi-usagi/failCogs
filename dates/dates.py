@@ -111,7 +111,17 @@ class Dates:
                             print(serverId)
                             print(date)
                             print(time)
-                            self._delete_date(serverId, date, time)
+                            if serverId in self.dates:
+                                if date in self.dates[serverId]:
+                                    if time in self.dates[serverId][date]:
+                                        del self.dates[serverId][date][time]
+                                        deletedState = True
+                            if not self.dates[serverId][date]:
+                                del self.dates[serverId][date]
+
+                            dataIO.save_json(self.dates_path, self.dates)
+                            self.dates = dataIO.load_json(self.dates_path)
+                            #self._delete_date(serverId, date, time)
 
     def checkDateTime(self, date, time):
         try:
