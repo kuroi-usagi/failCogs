@@ -28,6 +28,7 @@ class Dates:
         """Erstelle einen neuen Termin."""
 
         if not self.checkDateTime(date, time):
+            print("checking datetime")
             await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
             return
 
@@ -82,6 +83,7 @@ class Dates:
     async def checkDateTime(self, date, time):
         try:
             datetimestring = date + " " + time
+            print(datetimestring)
             datetime.datetime.strptime(datetimestring, '%d.%m.%y %H:%M')
             return True
         except ValueError:
