@@ -28,8 +28,10 @@ class Dates:
 
         newDate = (date, time, note)
         server = ctx.message.server
-        self.dates[server.id] = {}
-        self.dates[server.id][date] = {}
+        if server.id not in self.dates:
+            self.dates[server.id] = {}
+        if date not in self.dates[server.id]:
+            self.dates[server.id][date] = {}
         self.dates[server.id][date][time] = note
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
@@ -44,11 +46,9 @@ class Dates:
         for date in dates:
             header = date
             for time in self.dates[server.id][date]:
-                datetext = time + "*" + self.dates[server.id][date][time] + "*"
+                datetext = "*" + time + " - *" + self.dates[server.id][date][time]
                 embed.add_field(name=header, value=datetext)
         await self.bot.say(embed=embed)
-
-
 
 def check_folders():
     if not os.path.exists("data/dates"):
