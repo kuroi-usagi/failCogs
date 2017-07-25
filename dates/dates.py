@@ -36,8 +36,8 @@ class Dates:
 
         newDate = (date, time, note)
         server = ctx.message.server
-        self.dates[server.id] = []
-        self.dates[server.id][date] = []
+        self.dates[server.id] = {}
+        self.dates[server.id][date] = {}
         self.dates[server.id][date][time] = newDate
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
