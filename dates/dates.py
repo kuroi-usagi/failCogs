@@ -51,7 +51,7 @@ class Dates:
         embed = discord.Embed(title="Termine")
         for date in dates:
             embed.add_field(text=self.dates[server.id][date])
-        await self.bot.edit_message(message, new_content=" ", embed=embed)
+        await self.bot.say(embed=embed)
 
 
 
