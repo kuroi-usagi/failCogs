@@ -15,6 +15,7 @@ class Dates:
         self.bot = bot
         self.dates_path = "data/dates/dates.json"
         self.dates = dataIO.load_json(self.dates_path)
+        self.cleanup_task = bot.loop.create_task(self.cleanup())
 
 
     @commands.group(name="termin", pass_context=True)
@@ -81,6 +82,19 @@ class Dates:
 
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
+
+    async def cleanup(self):
+        while True:
+            await asyncio.sleep(60)
+            dates = self.dates[server.id]
+            date_string = ""
+            for date in dates:
+                for time in self.dates[server.id][date]:
+                    date_string += date + " " + time
+                    date_datetime = datetime.datetime.strptime(date_string, '%d.%m.%y %H:%M')
+                    now_datetime = datetime.datetime.now()
+                    if now_datetime > date_datetime:
+                        self.bot.say("Termin abgelaufen")
 
     def checkDateTime(self, date, time):
         try:
