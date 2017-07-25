@@ -15,7 +15,7 @@ class Dates:
         self.bot = bot
         self.dates_path = "data/dates/dates.json"
         self.dates = dataIO.load_json(self.dates_path)
-        self.cleanup_task = bot.loop.create_task(self._cleanup())
+        self.cleanup_task = bot.loop.create_task(self.cleanup())
 
     def __unload(self):
         self.cleanup_task.cancel()
@@ -100,7 +100,7 @@ class Dates:
 
         return deletedState
 
-    async def _cleanup(self):
+    async def cleanup(self):
         while True:
             await asyncio.sleep(5)
             print("cleanup should now run")
