@@ -3,7 +3,7 @@
     "AUTHOR" : "failgod",
     "SHORT" : "Let your users create dates and list them in the chat - german version",
     "DESCRIPTION" : "Let your users create dates for reference and organisational purpose. Furthermore can list them in a nice embed.",
-    "INSTALL_MSG" : "Thanks for installing Dats. .",
+    "INSTALL_MSG" : "Thanks for installing Dates.",
     "REQUIREMENTS" : [],
     "TAGS" : ["dates"],
     "DISABLED" : false
