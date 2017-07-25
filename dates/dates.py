@@ -35,6 +35,7 @@ class Dates:
         self.dates[server.id][date][time] = note
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
+        await self.bot.say("Termin angelegt.")
 
     @date.command(name="liste", pass_context=True)
     async def _list_dates(self, ctx):
@@ -59,7 +60,8 @@ class Dates:
             if date in self.dates[server.id]:
                 if time in self.dates[server.id][date]:
                     del self.dates[server.id][date][time]
-                    
+                    await self.bot.say("Termin gelöscht.")
+
         if not self.dates[server.id][date]:
             del self.dates[server.id][date]
 
