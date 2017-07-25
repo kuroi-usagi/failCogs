@@ -80,7 +80,7 @@ class Dates:
         dataIO.save_json(self.dates_path, self.dates)
         self.dates = dataIO.load_json(self.dates_path)
 
-    async def checkDateTime(self, date, time):
+    def checkDateTime(self, date, time):
         try:
             datetimestring = date + " " + time
             print(datetimestring)
