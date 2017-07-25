@@ -50,7 +50,7 @@ class Dates:
         dates = self.dates[server.id]
         embed = discord.Embed(title="Termine")
         for date in dates:
-            embed.add_field(name="Termin", value=self.dates[server.id][date])
+            embed.add_field(name=self.dates[server.id][date][0], value=self.dates[server.id][date])
             print(self.dates[server.id][date])
         await self.bot.say(embed=embed)
 
