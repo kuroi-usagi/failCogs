@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import re
+import os
 from discord.ext import commands
 from .utils.dataIO import dataIO
 from __main__ import send_cmd_help
