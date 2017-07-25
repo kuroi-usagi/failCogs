@@ -25,7 +25,8 @@ class Dates:
 
     @date.command(name="neu", pass_context=True)
     async def _new_date(self, ctx, date: str, time: str, note: str):
-        """Erstelle einen neuen Termin."""
+        """Erstelle einen neuen Termin.
+        Format: dd.mm.yy hh:mm"""
 
         if not self.checkDateTime(date, time):
             print("checking datetime")
@@ -61,10 +62,12 @@ class Dates:
 
     @date.command(name="löschen", pass_context=True)
     async def _del_date(self, ctx, date: str, time: str):
-        """Lösche einen Termin mit angegebenem Datum und Uhrzeit."""
+        """Lösche einen Termin mit angegebenem Datum und Uhrzeit.
+        Format: dd.mm.yy hh:mm"""
 
         if not self.checkDateTime(date, time):
-            await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.\nBeispiel: 22.04.17 19:23")
+            await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
+            await
             return
 
         server = ctx.message.server
