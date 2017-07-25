@@ -114,7 +114,7 @@ class Dates:
                             print(date_datetime)
                             if datetime.datetime.now() > date_datetime:
                                 self._delete_date(serverId, date, time)
-                        except:
+                        except ValueError:
                             print("ERROR in cleanup")
 
     def checkDateTime(self, date, time):
