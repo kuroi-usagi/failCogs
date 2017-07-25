@@ -40,7 +40,7 @@ class Dates:
 
 
 def check_folders():
-    if not os.path.exists()"data/dates"):
+    if not os.path.exists("data/dates"):
         print("Creating data/dates directory...")
         os.makedirs("data/dates")
 
