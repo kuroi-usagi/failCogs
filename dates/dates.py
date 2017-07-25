@@ -57,7 +57,6 @@ class Dates:
             for time in self.dates[server.id][date]:
                 datetext += "*" + time + "* - " + self.dates[server.id][date][time] + "\n"
             embed.add_field(name=header, value=datetext)
-            embed.add_field(embed.Empty)
             datetext = ""
         await self.bot.say(embed=embed)
 
