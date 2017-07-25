@@ -104,7 +104,7 @@ class Dates:
                         print(time)
                         date_time_string = date + " " + time
                         date_datetime = datetime.datetime.strptime(date_time_string, '%d.%m.%y %H:%M')
-                        print(date_string)
+                        print(date_time_string)
                         print(date_datetime)
                         if datetime.datetime.now() > date_datetime:
                             print("delete all the things!")
