@@ -88,7 +88,7 @@ class Dates:
 
     async def cleanup(self):
         while True:
-            await asyncio.sleep(60)
+            await asyncio.sleep(5)
             print("cleanup should now run")
             dates = self.dates[server.id]
             for serverId in dates:
