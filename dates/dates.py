@@ -73,23 +73,25 @@ class Dates:
             return
 
         server = ctx.message.server
-        if self._delete_date(server.id, date, time):
+        if await self._delete_date(server.id, date, time):
             await self.bot.say("Termin gelöscht.")
 
-    def _delete_date(self,serverId, date, time):
-        print("deleting date entry")
+    async def _delete_date(self,serverId, date, time):
         deletedState = False
-        if serverId in self.dates:
-            if date in self.dates[serverId]:
-                if time in self.dates[serverId][date]:
-                    del self.dates[serverId][date][time]
-                    deletedState = True
-        if not self.dates[serverId][date]:
-            del self.dates[serverId][date]
+        try:
+            print("deleting date entry")
+            if serverId in self.dates:
+                if date in self.dates[serverId]:
+                    if time in self.dates[serverId][date]:
+                        del self.dates[serverId][date][time]
+                        deletedState = True
+            if not self.dates[serverId][date]:
+                del self.dates[serverId][date]
 
-        dataIO.save_json(self.dates_path, self.dates)
-        self.dates = dataIO.load_json(self.dates_path)
-
+            dataIO.save_json(self.dates_path, self.dates)
+            self.dates = dataIO.load_json(self.dates_path)
+        except:
+            print("error when deleting stuff")
         return deletedState
 
     async def cleanup(self):
@@ -111,17 +113,7 @@ class Dates:
                             print(serverId)
                             print(date)
                             print(time)
-                            if serverId in self.dates:
-                                if date in self.dates[serverId]:
-                                    if time in self.dates[serverId][date]:
-                                        del self.dates[serverId][date][time]
-                                        deletedState = True
-                            if not self.dates[serverId][date]:
-                                del self.dates[serverId][date]
-
-                            dataIO.save_json(self.dates_path, self.dates)
-                            self.dates = dataIO.load_json(self.dates_path)
-                            #self._delete_date(serverId, date, time)
+                            await self._delete_date(serverId, date, time)
 
     def checkDateTime(self, date, time):
         try:
