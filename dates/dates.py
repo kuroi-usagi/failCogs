@@ -64,7 +64,7 @@ class Dates:
         """Lösche einen Termin mit angegebenem Datum und Uhrzeit."""
 
         if not self.checkDateTime(date, time):
-            await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.")
+            await self.bot.say("Bitte ein korrektes Datum und eine korrekte Uhrzeit angeben.\nBeispiel: 22.04.17 19:23")
             return
 
         server = ctx.message.server
