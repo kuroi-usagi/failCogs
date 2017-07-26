@@ -51,10 +51,13 @@ class Dates:
         """Listet alle Termine auf."""
 
         server = ctx.message.server
-        dates = self.dates[server.id]
+        if not server.id in self.dates:
+            await self.bot.say("Es wurden bisher keine Termine für diesen Server angelegt.")
+            return
+            
         embed = discord.Embed(title="Termine", color = 0x00c9f4)
         datetext = ""
-        for date in dates:
+        for date in self.dates[server.id]:
             header = date
             for time in self.dates[server.id][date]:
                 datetext += "*" + time + "* - " + self.dates[server.id][date][time] + "\n"
