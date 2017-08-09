@@ -76,6 +76,7 @@ class Albion:
                     print(server_status)
                     print(self.settings[serverId][channelId] == server_status)
                     if self.settings[serverId][channelId] == server_status:
+                        pass
                     if self.settings[serverId][channelId] != server_status and server_status == "online":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
