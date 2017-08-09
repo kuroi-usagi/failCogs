@@ -4,6 +4,7 @@ import aiohttp
 import os
 from discord.ext import commands
 from .utils.dataIO import dataIO
+from .utils import checks
 from __main__ import send_cmd_help
 
 
@@ -36,6 +37,7 @@ class Albion:
             await send_cmd_help(ctx)
 
     @albion.command(name="statuscheck", pass_context=True)
+    @checks.admin_or_permissions(manage_server=True)
     async def _set_statuscheck(self, ctx, status: str):
         """ Schaltet den Statuscheck für diesen Channel ein. """
         server = ctx.message.server
