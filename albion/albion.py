@@ -69,12 +69,12 @@ class Albion:
                     else:
                         await self.bot.send_message(channel, 'Albion Online Server ist wieder online!')
 
-    def check_folders():
+    def check_folders(self):
         if not os.path.exists(self.settings_path):
             print("Creating data/dates directory...")
             os.makedirs(self.settings_path)
 
-    def check_files():
+    def check_files(self):
         f = "data/dates/dates.json"
         if not dataIO.is_valid_json(self.settings_filepath):
             print("Creating "+ self.settings_filepath +"...")
