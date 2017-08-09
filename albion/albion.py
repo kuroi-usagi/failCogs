@@ -45,7 +45,7 @@ class Albion:
                 self.settings[server.id] = {}
             if channel.id not in self.settings[server.id]:
                 self.settings[server.id][channel.id] = {}
-            status = self._check_online()
+            status = await self._check_online()
             self.settings[server.id][channel.id] = status
             print(status)
         dataIO.save_json(self.settings_filepath, self.settings)
