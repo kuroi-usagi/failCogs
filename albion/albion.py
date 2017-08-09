@@ -36,6 +36,7 @@ class Albion:
             await send_cmd_help(ctx)
 
     @albion.command(name="statuscheck", pass_context=True)
+    @checks.admin_or_permissions(manage_server=True)
     async def _set_statuscheck(self, ctx, status: str):
         """ Schaltet den Statuscheck für diesen Channel ein. """
         server = ctx.message.server
@@ -52,6 +53,15 @@ class Albion:
                 del self.settings[server.id][channel.id]
         dataIO.save_json(self.settings_filepath, self.settings)
         self.settings = dataIO.load_json(self.settings_filepath)
+
+    @albion.command(name="status", pass_context=True, aliases=['astat])
+    async def _get_status(self, ctx):
+        """ Fragt den momentanen Status der Server ab. """
+        status = await self._check_online()
+        if status == "offline":
+            await self.bot.say(':no_entry: Albion Online ist offline! :no_entry:')
+        if status == "online"
+            await self.bot.say('Albion Online ist online! :crossed_swords:')
 
     async def _check_online(self):
         url = "http://live.albiononline.com/status.txt"
