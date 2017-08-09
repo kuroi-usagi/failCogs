@@ -47,7 +47,9 @@ class Albion:
                 self.settings[server.id][channel.id] = {}
             status = self._check_online()
             self.settings[server.id][channel.id] = status
+            print(status)
         dataIO.save_json(self.settings_filepath, self.settings)
+        self.settings = dataIO.load_json(self.settings_filepath)
 
     async def _check_online(self):
         url = "http://live.albiononline.com/status.txt"
