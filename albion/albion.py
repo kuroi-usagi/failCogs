@@ -57,14 +57,17 @@ class Albion:
         conn = aiohttp.TCPConnector(verify_ssl=False)
         session = aiohttp.ClientSession(connector=conn)
         async with session.get(url, headers=headers) as r:
-            result = await r.json()
+            result = await r.text()
         session.close()
-        return result['status']
+        if "offline" in result:
+            return "offline"
+        if "online" in result:
+            return "online"
 
     async def checkStatus(self):
         print("Status Check Cronjob started...")
         while True:
-            await asyncio.sleep(5)
+            await asyncio.sleep(60)
             print("scanning server")
             server_status = await self._check_online()
             for serverId in self.settings:
@@ -73,17 +76,14 @@ class Albion:
                     print(server_status)
                     print(self.settings[serverId][channelId] == server_status)
                     if self.settings[serverId][channelId] == server_status:
-                        print("nothing changed, no message send")
                     if self.settings[serverId][channelId] != server_status and server_status == "online":
-                        print("should say online")
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist online!')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist online! :crossed_swords:')
                     if self.settings[serverId][channelId] != server_status and server_status == "offline":
-                        print("should say offline")
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist offline!')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':no_entry: Albion Online Server ist offline! :no_entry:')
 
 def check_folders():
     if not os.path.exists(settings_path):
