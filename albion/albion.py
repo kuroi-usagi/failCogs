@@ -54,7 +54,7 @@ class Albion:
         dataIO.save_json(self.settings_filepath, self.settings)
         self.settings = dataIO.load_json(self.settings_filepath)
 
-    @albion.command(name="status", pass_context=True, aliases=['astat])
+    @albion.command(name="status", pass_context=True, aliases=['astat'])
     async def _get_status(self, ctx):
         """ Fragt den momentanen Status der Server ab. """
         status = await self._check_online()
