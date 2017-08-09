@@ -81,7 +81,7 @@ def check_folders():
 def check_files():
     if not dataIO.is_valid_json(settings_filepath):
         print("Creating "+ settings_filepath +"...")
-        dataIO.save_json(f, {})
+        dataIO.save_json(settings_filepath, {})
 
 def setup(bot):
     check_folders()
