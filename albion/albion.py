@@ -64,13 +64,16 @@ class Albion:
     async def checkStatus(self):
         while True:
             await asyncio.sleep(360)
-            server_status = self._check_online()
+            print("checking online status of albiononline servers...")
+            server_status = await self._check_online()
             for serverId in self.settings:
                 for channel in self.settings[serverId]:
-                    if channel != server_status and server_status == "offline":
-                        await self.bot.send_message(channel, 'Albion Online Server ist offline!')
-                    else:
-                        await self.bot.send_message(channel, 'Albion Online Server ist wieder online!')
+                    if channel == "online":
+                        await self.bot.send_message(channel, 'Albion Online Server ist online!')
+                    #if channel != server_status and server_status == "offline":
+                    #    await self.bot.send_message(channel, 'Albion Online Server ist offline!')
+                    #else:
+                    #    await self.bot.send_message(channel, 'Albion Online Server ist wieder online!')
 
 def check_folders():
     if not os.path.exists(settings_path):
