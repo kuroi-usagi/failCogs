@@ -72,9 +72,9 @@ class Albion:
         async with session.get(url, headers=headers) as r:
             result = await r.json()
         session.close()
-        if "offline" in result['current_status']:
+        if "offline" in result[0]['current_status']:
             return "offline"
-        if "online" in result['current_status']:
+        if "online" in result[0]['current_status']:
             return "online"
 
     async def checkStatus(self):
