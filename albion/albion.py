@@ -59,7 +59,7 @@ class Albion:
         async with session.get(url, headers=headers) as r:
             result = await r.json()
         session.close()
-        return result[status]
+        return result['status']
 
     async def checkStatus(self):
         while True:
