@@ -64,16 +64,12 @@ class Albion:
     async def checkStatus(self):
         print("Status Check Cronjob started...")
         while True:
-            await asyncio.sleep(3)
-            print("checking online status of albiononline servers...")
+            await asyncio.sleep(60)
             server_status = await self._check_online()
             for serverId in self.settings:
-                print(serverId)
                 for channelId in self.settings[serverId]:
-                    print(channelId)
                     if self.settings[serverId][channelId] == "online":
-                        print("ist online")
-                        #await self.bot.send_message(channelId, 'Albion Online Server ist online!')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist online!')
                     #if channel != server_status and server_status == "offline":
                     #    await self.bot.send_message(channel, 'Albion Online Server ist offline!')
                     #else:
