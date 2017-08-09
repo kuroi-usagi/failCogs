@@ -6,13 +6,13 @@ from discord.ext import commands
 from .utils.dataIO import dataIO
 from __main__ import send_cmd_help
 
-class Dates:
+class Albion:
 
-    """Create dates for the chat"""
+    """Check Albion things"""
 
     def __init__(self, bot):
         self.bot = bot
-        _path = "data/albion"
+        self.settings_path = "data/albion"
         self.settings_filepath = self.settings_path + "/" + "channels.json"
         self.settings = dataIO.load_json(self.settings_path+"/"+self.settings_filename)
         self.check_task = bot.loop.create_task(self.checkStatus())
@@ -64,14 +64,6 @@ class Dates:
                     else:
                         await self.bot.send_message(channel, 'Albion Online Server ist wieder online!')
 
-    def checkDateTime(self, date, time):
-        try:
-            datetimestring = date + " " + time
-            datetime.datetime.strptime(datetimestring, '%d.%m.%y %H:%M')
-            return True
-        except ValueError:
-            return False
-
     def check_folders():
         if not os.path.exists(self.settings_path):
             print("Creating data/dates directory...")
@@ -84,7 +76,7 @@ class Dates:
             dataIO.save_json(f, {})
 
 def setup(bot):
-    n = Dates(bot)
+    n = Albion(bot)
     n.check_folders()
     n.check_files()
     bot.add_cog(n)
