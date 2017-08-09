@@ -65,16 +65,16 @@ class Albion:
             await self.bot.say('Albion Online ist online! :crossed_swords:')
 
     async def _check_online(self):
-        url = "http://live.albiononline.com/status.txt"
+        url = "https://api.albionstatus.com/current/"
         headers = {'user-agent': 'Tron-cog/1.0'}
         conn = aiohttp.TCPConnector(verify_ssl=False)
         session = aiohttp.ClientSession(connector=conn)
         async with session.get(url, headers=headers) as r:
-            result = await r.text()
+            result = await r.json()
         session.close()
-        if "offline" in result:
+        if "offline" in result['current_status']:
             return "offline"
-        if "online" in result:
+        if "online" in result['current_status']:
             return "online"
 
     async def checkStatus(self):
