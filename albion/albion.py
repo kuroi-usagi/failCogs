@@ -36,7 +36,6 @@ class Albion:
             await send_cmd_help(ctx)
 
     @albion.command(name="statuscheck", pass_context=True)
-    @checks.admin_or_permissions(manage_server=True)
     async def _set_statuscheck(self, ctx, status: str):
         """ Schaltet den Statuscheck für diesen Channel ein. """
         server = ctx.message.server
