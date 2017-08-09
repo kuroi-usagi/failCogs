@@ -68,7 +68,7 @@ class Albion:
             server_status = await self._check_online()
             for serverId in self.settings:
                 for channel in self.settings[serverId]:
-                    if channel == "online":
+                    if self.settings[serverId][channel] == "online":
                         await self.bot.send_message(channel, 'Albion Online Server ist online!')
                     #if channel != server_status and server_status == "offline":
                     #    await self.bot.send_message(channel, 'Albion Online Server ist offline!')
