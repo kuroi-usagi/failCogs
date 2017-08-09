@@ -71,9 +71,11 @@ class Albion:
                     if self.settings[serverId][channelId] == server_status:
                         print("nothing changed, no message send")
                     if self.settings[serverId][channelId] != server_status and self.settings[serverId][channelId] == "online":
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist wieder online!')
+                        print("should say online")
+                        #await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist wieder online!')
                     if self.settings[serverId][channelId] != server_status and self.settings[serverId][channelId] == "offline":
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist offline!')
+                        print("should say offline")
+                        #await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online Server ist offline!')
 
 def check_folders():
     if not os.path.exists(settings_path):
