@@ -45,7 +45,8 @@ class Albion:
                 self.settings[server.id] = {}
             if channel.id not in self.settings[server.id]:
                 self.settings[server.id][channel.id] = {}
-            self.settings[server.id][channel.id] = self._check_online()
+            status = self._check_online()
+            self.settings[server.id][channel.id] = status
         dataIO.save_json(self.settings_filepath, self.settings)
 
     async def _check_online(self):
@@ -56,19 +57,15 @@ class Albion:
         async with session.get(url, headers=headers) as r:
             result = await r.json()
         session.close()
-        if(result[status] == "online"):
-            return True
-        if(result[status] == "offline"):
-            return False
-        return False
+        return result[status]
 
     async def checkStatus(self):
         while True:
             await asyncio.sleep(360)
-            server_online = self._check_online()
+            server_status = self._check_online()
             for serverId in self.settings:
                 for channel in self.settings[serverId]:
-                    if channel != server_online and server_online == False:
+                    if channel != server_status and server_status == "offline":
                         await self.bot.send_message(channel, 'Albion Online Server ist offline!')
                     else:
                         await self.bot.send_message(channel, 'Albion Online Server ist wieder online!')
