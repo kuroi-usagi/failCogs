@@ -64,7 +64,7 @@ class Albion:
     async def checkStatus(self):
         print("Status Check Cronjob started...")
         while True:
-            await asyncio.sleep(60)
+            await asyncio.sleep(3)
             print("checking online status of albiononline servers...")
             server_status = await self._check_online()
             for serverId in self.settings:
