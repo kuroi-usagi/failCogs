@@ -64,10 +64,14 @@ class Albion:
     async def checkStatus(self):
         print("Status Check Cronjob started...")
         while True:
-            await asyncio.sleep(60)
+            await asyncio.sleep(5)
+            print("scanning server")
             server_status = await self._check_online()
             for serverId in self.settings:
                 for channelId in self.settings[serverId]:
+                    print(self.settings[serverId][channelId])
+                    print(server_status)
+                    print(self.settings[serverId][channelId] == server_status)
                     if self.settings[serverId][channelId] == server_status:
                         print("nothing changed, no message send")
                     if self.settings[serverId][channelId] != server_status and server_status == "online":
