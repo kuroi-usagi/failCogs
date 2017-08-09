@@ -14,7 +14,7 @@ class Albion:
         self.bot = bot
         self.settings_path = "data/albion"
         self.settings_filepath = self.settings_path + "/" + "channels.json"
-        self.settings = dataIO.load_json(self.settings_path+"/"+self.settings_filename)
+        self.settings = dataIO.load_json(self.settings_filepath)
         self.check_task = bot.loop.create_task(self.checkStatus())
 
     def __unload(self):
