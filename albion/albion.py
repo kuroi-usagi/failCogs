@@ -6,14 +6,18 @@ from discord.ext import commands
 from .utils.dataIO import dataIO
 from __main__ import send_cmd_help
 
+
+settings_path = "data/albion"
+settings_filepath = settings_path + "/" + "channels.json"
+
 class Albion:
 
     """Check Albion things"""
 
     def __init__(self, bot):
         self.bot = bot
-        self.settings_path = "data/albion"
-        self.settings_filepath = self.settings_path + "/" + "channels.json"
+        self.settings_path = settings_path
+        self.settings_filepath = settings_filepath
         try:
             self.settings = dataIO.load_json(self.settings_filepath)
         except:
@@ -69,19 +73,18 @@ class Albion:
                     else:
                         await self.bot.send_message(channel, 'Albion Online Server ist wieder online!')
 
-    def check_folders(self):
-        if not os.path.exists(self.settings_path):
-            print("Creating data/dates directory...")
-            os.makedirs(self.settings_path)
+def check_folders():
+    if not os.path.exists(settings_path):
+        print("Creating data/dates directory...")
+        os.makedirs(self.settings_path)
 
-    def check_files(self):
-        f = "data/dates/dates.json"
-        if not dataIO.is_valid_json(self.settings_filepath):
-            print("Creating "+ self.settings_filepath +"...")
-            dataIO.save_json(f, {})
+def check_files():
+    if not dataIO.is_valid_json(settings_filepath):
+        print("Creating "+ self.settings_filepath +"...")
+        dataIO.save_json(f, {})
 
 def setup(bot):
+    check_folders()
+    check_files()
     n = Albion(bot)
-    n.check_folders()
-    n.check_files()
     bot.add_cog(n)
