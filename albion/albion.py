@@ -76,11 +76,11 @@ class Albion:
 def check_folders():
     if not os.path.exists(settings_path):
         print("Creating data/dates directory...")
-        os.makedirs(self.settings_path)
+        os.makedirs(settings_path)
 
 def check_files():
     if not dataIO.is_valid_json(settings_filepath):
-        print("Creating "+ self.settings_filepath +"...")
+        print("Creating "+ settings_filepath +"...")
         dataIO.save_json(f, {})
 
 def setup(bot):
