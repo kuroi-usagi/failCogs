@@ -1,0 +1,10 @@
+{
+    "NAME" : "Albion",
+    "AUTHOR" : "failgod",
+    "SHORT" : "Checks the server status of Albion Online",
+    "DESCRIPTION" : "Checks every minute the status of the Albion Online Servers and promotes changes to specific channels.",
+    "INSTALL_MSG" : "Thanks for installing Albion.",
+    "REQUIREMENTS" : [],
+    "TAGS" : ["albion online"],
+    "DISABLED" : false
+}
