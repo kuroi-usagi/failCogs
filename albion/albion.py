@@ -89,7 +89,7 @@ class Albion:
                     if self.settings[serverId][channelId] != server_status and server_status == "online":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':hammer_pick: Albion ist :regional_indicator_o:nline! :crossed_swords:')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':hammer_pick: :regional_indicator_a:lbion ist :regional_indicator_o:nline! :crossed_swords:')
                     if self.settings[serverId][channelId] != server_status and server_status == "offline":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
