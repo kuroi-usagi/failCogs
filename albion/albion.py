@@ -80,7 +80,7 @@ class Albion:
     async def checkStatus(self):
         print("Status Check Cronjob started...")
         while True:
-            await asyncio.sleep(60)
+            await asyncio.sleep(300)
             server_status = await self._check_online()
             for serverId in self.settings:
                 for channelId in self.settings[serverId]:
@@ -89,11 +89,11 @@ class Albion:
                     if self.settings[serverId][channelId] != server_status and server_status == "online":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), 'Albion Online ist online! :crossed_swords:')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':hammer_pick: Albion ist :regional_indicator_o:nline! :crossed_swords:')
                     if self.settings[serverId][channelId] != server_status and server_status == "offline":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':no_entry: Albion Online ist offline! :no_entry:')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':no_entry: :regional_indicator_a:lbion ist :o2:ffline! :no_entry:')
 
 def check_folders():
     if not os.path.exists(settings_path):
