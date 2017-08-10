@@ -98,6 +98,10 @@ class Albion:
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
                         await self.bot.send_message(self.bot.get_channel(str(channelId)), ':airplane_departure: :regional_indicator_a:lbion Server sind am starten! :airplane_departure: ')
+                    if self.settings[serverId][channelId] != server_status and server_status == "unknown":
+                        self.settings[serverId][channelId] = server_status
+                        dataIO.save_json(self.settings_filepath, self.settings)
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':scream: :regional_indicator_a:lbions Zustand ist unklar! Möglicherweise ist gerade Wartung im Gange. :thinking:')
 
 def check_folders():
     if not os.path.exists(settings_path):
