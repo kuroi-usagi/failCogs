@@ -94,6 +94,10 @@ class Albion:
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
                         await self.bot.send_message(self.bot.get_channel(str(channelId)), ':no_entry: :regional_indicator_a:lbion ist :o2:ffline! :no_entry:')
+                    if self.settings[serverId][channelId] != server_status and server_status == "starting":
+                        self.settings[serverId][channelId] = server_status
+                        dataIO.save_json(self.settings_filepath, self.settings)
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':airplane_departure: :regional_indicator_a:lbion Server sind am starten! :airplane_departure: ')
 
 def check_folders():
     if not os.path.exists(settings_path):
