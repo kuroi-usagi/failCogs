@@ -19,6 +19,10 @@ class Albion:
         self.bot = bot
         self.settings_path = settings_path
         self.settings_filepath = settings_filepath
+        self.standard_online_message = ':hammer_pick: :regional_indicator_a:lbion ist :regional_indicator_o:nline! :crossed_swords:'
+        self.standard_offline_message = ':no_entry: :regional_indicator_a:lbion ist :o2:ffline! :no_entry:'
+        self.standard_starting_message = ':airplane_departure: :regional_indicator_a:lbion Server sind am starten! :airplane_departure: '
+        self.standard_unknown_message = ':scream: :regional_indicator_a:lbions Zustand ist unklar! Möglicherweise ist gerade Wartung im Gange. :thinking:'
         try:
             self.settings = dataIO.load_json(self.settings_filepath)
         except:
@@ -84,24 +88,84 @@ class Albion:
             server_status = await self._check_online()
             for serverId in self.settings:
                 for channelId in self.settings[serverId]:
+                    if 'onlineMessage' in self.settings[serverId][channelId]:
+                        online_message = self.settings[serverId][channelId]['onlineMessage']
+                    else:
+                        online_message = self.standard_online_message
+
+                    if 'offlineMessage' in self.settings[serverId][channelId]:
+                        offline_message = self.settings[serverId][channelId]['offlineMessage']
+                    else:
+                        offline_message = self.standard_offine_message
+
+                    if 'startingMessage' in self.settings[serverId][channelId]:
+                        starting_message = self.settings[serverId][channelId]['startingMessage']
+                    else:
+                        starting_message = self.standard_starting_message
+
+                    if 'unknownMessage' in self.settings[serverId][channelId]:
+                        unknown_message = self.settings[serverId][channelId]['unknownMessage']
+                    else:
+                        unknown_message = self.standard_unknown_message
+
                     if self.settings[serverId][channelId] == server_status:
                         pass
                     if self.settings[serverId][channelId] != server_status and server_status == "online":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':hammer_pick: :regional_indicator_a:lbion ist :regional_indicator_o:nline! :crossed_swords:')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), online_message)
                     if self.settings[serverId][channelId] != server_status and server_status == "offline":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':no_entry: :regional_indicator_a:lbion ist :o2:ffline! :no_entry:')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), offline_message)
                     if self.settings[serverId][channelId] != server_status and server_status == "starting":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':airplane_departure: :regional_indicator_a:lbion Server sind am starten! :airplane_departure: ')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), starting_message)
                     if self.settings[serverId][channelId] != server_status and server_status == "unknown":
                         self.settings[serverId][channelId] = server_status
                         dataIO.save_json(self.settings_filepath, self.settings)
-                        await self.bot.send_message(self.bot.get_channel(str(channelId)), ':scream: :regional_indicator_a:lbions Zustand ist unklar! Möglicherweise ist gerade Wartung im Gange. :thinking:')
+                        await self.bot.send_message(self.bot.get_channel(str(channelId)), uknown_message)
+
+    @albion.command(name="setonlinemessage", pass_context=True, aliases=['astat'])
+    async def _setOnlineMessage(self, ctx, message: str):
+        """ Setzt die Online Message. """
+        server = ctx.message.server
+        channel = ctx.message.channel
+        if channel.id in self.data[server.id]:
+            self.settings[server.id][channel.id]['onlineMessage'] = message
+        else:
+            bot.say("Albion status is not set for this channel.")
+
+    @albion.command(name="setofflinemessage", pass_context=True, aliases=['astat'])
+    async def _setOfflineMessage(self, ctx, message: str):
+        """ Setzt die Offline Message. """
+            server = ctx.message.server
+            channel = ctx.message.channel
+            if channel.id in self.data[server.id]:
+                self.settings[server.id][channel.id]['offlineMessage'] = message
+            else:
+                bot.say("Albion status is not set for this channel.")
+
+    @albion.command(name="setstartingmessage", pass_context=True, aliases=['astat'])
+    async def _setStartingMessage(self, ctx, message: str):
+        """ Setzt die Start Message. """
+        server = ctx.message.server
+        channel = ctx.message.channel
+        if channel.id in self.data[server.id]:
+            self.settings[server.id][channel.id]['startingMessage'] = message
+        else:
+            bot.say("Albion status is not set for this channel.")
+
+    @albion.command(name="setunknownmessage", pass_context=True, aliases=['astat'])
+    async def _setUnknownMessage(self, ctx, message: str):
+        """ Setzt die Unknown Message. """
+        server = ctx.message.server
+        channel = ctx.message.channel
+        if channel.id in self.data[server.id]:
+            self.settings[server.id][channel.id]['unknownMessage'] = message
+        else:
+            bot.say("Albion status is not set for this channel.")
 
 def check_folders():
     if not os.path.exists(settings_path):
