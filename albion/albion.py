@@ -140,12 +140,12 @@ class Albion:
     @albion.command(name="setofflinemessage", pass_context=True, aliases=['astat'])
     async def _setOfflineMessage(self, ctx, message: str):
         """ Setzt die Offline Message. """
-            server = ctx.message.server
-            channel = ctx.message.channel
-            if channel.id in self.data[server.id]:
-                self.settings[server.id][channel.id]['offlineMessage'] = message
-            else:
-                bot.say("Albion status is not set for this channel.")
+        server = ctx.message.server
+        channel = ctx.message.channel
+        if channel.id in self.data[server.id]:
+            self.settings[server.id][channel.id]['offlineMessage'] = message
+        else:
+            bot.say("Albion status is not set for this channel.")
 
     @albion.command(name="setstartingmessage", pass_context=True, aliases=['astat'])
     async def _setStartingMessage(self, ctx, message: str):
