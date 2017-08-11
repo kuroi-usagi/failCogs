@@ -127,7 +127,7 @@ class Albion:
                         dataIO.save_json(self.settings_filepath, self.settings)
                         await self.bot.send_message(self.bot.get_channel(str(channelId)), uknown_message)
 
-    @albion.command(name="setonlinemessage", pass_context=True, aliases=['astat'])
+    @albion.command(name="setonlinemessage", pass_context=True)
     async def _setOnlineMessage(self, ctx, message: str):
         """ Setzt die Online Message. """
         server = ctx.message.server
@@ -137,7 +137,7 @@ class Albion:
         else:
             bot.say("Albion status is not set for this channel.")
 
-    @albion.command(name="setofflinemessage", pass_context=True, aliases=['astat'])
+    @albion.command(name="setofflinemessage", pass_context=True)
     async def _setOfflineMessage(self, ctx, message: str):
         """ Setzt die Offline Message. """
         server = ctx.message.server
@@ -147,7 +147,7 @@ class Albion:
         else:
             bot.say("Albion status is not set for this channel.")
 
-    @albion.command(name="setstartingmessage", pass_context=True, aliases=['astat'])
+    @albion.command(name="setstartingmessage", pass_context=True)
     async def _setStartingMessage(self, ctx, message: str):
         """ Setzt die Start Message. """
         server = ctx.message.server
@@ -157,7 +157,7 @@ class Albion:
         else:
             bot.say("Albion status is not set for this channel.")
 
-    @albion.command(name="setunknownmessage", pass_context=True, aliases=['astat'])
+    @albion.command(name="setunknownmessage", pass_context=True)
     async def _setUnknownMessage(self, ctx, message: str):
         """ Setzt die Unknown Message. """
         server = ctx.message.server
