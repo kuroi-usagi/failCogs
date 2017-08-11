@@ -19,10 +19,11 @@ class Albion:
         self.bot = bot
         self.settings_path = settings_path
         self.settings_filepath = settings_filepath
-        self.standard_online_message = ':hammer_pick: :regional_indicator_a:lbion ist :regional_indicator_o:nline! :crossed_swords:'
-        self.standard_offline_message = ':no_entry: :regional_indicator_a:lbion ist :o2:ffline! :no_entry:'
-        self.standard_starting_message = ':airplane_departure: :regional_indicator_a:lbion Server sind am starten! :airplane_departure: '
-        self.standard_unknown_message = ':scream: :regional_indicator_a:lbions Zustand ist unklar! Möglicherweise ist gerade Wartung im Gange. :thinking:'
+        self.messages = {}
+        self.messages['onlineMessage'] = ':hammer_pick: :regional_indicator_a:lbion ist :regional_indicator_o:nline! :crossed_swords:'
+        self.messages['offlineMessage'] = ':no_entry: :regional_indicator_a:lbion ist :o2:ffline! :no_entry:'
+        self.messages['startingMessage'] = ':airplane_departure: :regional_indicator_a:lbion Server sind am starten! :airplane_departure:'
+        self.messages['unknownMessage'] = ':scream: :regional_indicator_a:lbions Zustand ist unklar! Möglicherweise ist gerade Wartung im Gange. :thinking:'
         try:
             self.settings = dataIO.load_json(self.settings_filepath)
         except:
@@ -59,7 +60,7 @@ class Albion:
         dataIO.save_json(self.settings_filepath, self.settings)
         self.settings = dataIO.load_json(self.settings_filepath)
 
-    @albion.command(name="status", pass_context=True, aliases=['astat'])
+    @bot.command(name="albionstat", pass_context=True, aliases=['astat'])
     async def _get_status(self, ctx):
         """ Fragt den momentanen Status der Server ab. """
         status = await self._check_online()
@@ -91,22 +92,22 @@ class Albion:
                     if 'onlineMessage' in self.settings[serverId][channelId]:
                         online_message = self.settings[serverId][channelId]['onlineMessage']
                     else:
-                        online_message = self.standard_online_message
+                        online_message = self.messages['onlineMessage']
 
                     if 'offlineMessage' in self.settings[serverId][channelId]:
                         offline_message = self.settings[serverId][channelId]['offlineMessage']
                     else:
-                        offline_message = self.standard_offine_message
+                        offline_message = self.messages['offlineMessage']
 
                     if 'startingMessage' in self.settings[serverId][channelId]:
                         starting_message = self.settings[serverId][channelId]['startingMessage']
                     else:
-                        starting_message = self.standard_starting_message
+                        starting_message = self.messages['startingMessage']
 
                     if 'unknownMessage' in self.settings[serverId][channelId]:
                         unknown_message = self.settings[serverId][channelId]['unknownMessage']
                     else:
-                        unknown_message = self.standard_unknown_message
+                        unknown_message = self.messages['unknownMessage']
 
                     if self.settings[serverId][channelId] == server_status:
                         pass
