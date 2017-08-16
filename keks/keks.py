@@ -11,8 +11,9 @@ class Keks:
         self.bot = bot
         self.cookie_answers = [
             "Oh vielen Dank!",
-            "Om nom nom",
-            "Ich liebe Kekse!"
+            "Om nom nom :yum:",
+            "Ich liebe Kekse! :laughing:",
+            ":blush:"
         ]
 
     @commands.command(name="keks", pass_context=True)
