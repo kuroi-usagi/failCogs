@@ -65,9 +65,9 @@ class Albion:
         """ Fragt den momentanen Status der Server ab. """
         status = await self._check_online()
         if status == "offline":
-            await self.bot.say(self.messages['onlineMessage'])
-        if status == "online":
             await self.bot.say(self.messages['offlineMessage'])
+        if status == "online":
+            await self.bot.say(self.messages['onlineMessage'])
 
     async def _check_online(self):
         url = "https://api.albionstatus.com/current/"
