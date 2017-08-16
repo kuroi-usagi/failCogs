@@ -20,7 +20,7 @@ class Keks:
         """
         Give the bot a cookie
         """
-        await self.bot.say(ramdon.choice(self.cookie_answers))
+        await self.bot.say(randon.choice(self.cookie_answers))
 
 def setup(bot):
     n = Keks(bot)
