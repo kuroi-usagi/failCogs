@@ -55,7 +55,7 @@ class GamingAccount:
                 data = discord.Embed(description="{}".format(server), colour=user.colour)
                 if "PSN" in self.nerdie[server.id][user.id]:
                     age = self.nerdie[server.id][user.id]["PSN"]
-                    data.add_field(name="PSN:", value=age)
+                    data.add_field(name="PSN:", value=psn)
                 else:
                     pass
                 if user.avatar_url:
