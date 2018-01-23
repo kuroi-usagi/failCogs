@@ -54,7 +54,7 @@ class GamingAccount:
             if user.id in self.nerdie[server.id]:
                 data = discord.Embed(description="{}".format(server), colour=user.colour)
                 if "PSN" in self.nerdie[server.id][user.id]:
-                    age = self.nerdie[server.id][user.id]["PSN"]
+                    psn = self.nerdie[server.id][user.id]["PSN"]
                     data.add_field(name="PSN:", value=psn)
                 else:
                     pass
@@ -101,7 +101,7 @@ class GamingAccount:
         await send_cmd_help(ctx)
 
     @update.command(pass_context=True, no_pm=True)
-    async def psn(self, ctx, *, age):
+    async def psn(self, ctx, *, psn):
         """Wie lautet deine PSN?"""
         
         server = ctx.message.server
@@ -118,10 +118,10 @@ class GamingAccount:
             data.add_field(name="Error:Warnung:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
             await self.bot.say(embed=data)
         else:
-            self.nerdie[server.id][user.id].update({"PSN" : age})
+            self.nerdie[server.id][user.id].update({"PSN" : psn})
             dataIO.save_json(self.profile, self.nerdie)
             data = discord.Embed(colour=user.colour)
-            data.add_field(name="Glückwunsch!:sparkles:",value="Deine PSN ist jetzt {}".format(age))
+            data.add_field(name="Glückwunsch!:sparkles:",value="Deine PSN ist jetzt {}".format(psn))
             await self.bot.say(embed=data)
 
 def check_folder():
