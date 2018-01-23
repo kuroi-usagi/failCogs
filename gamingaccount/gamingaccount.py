@@ -65,6 +65,18 @@ class GamingAccount:
                     data.set_thumbnail(url=user.avatar_url)
                 else:
                     data.set_author(name=user.name)
+                if "XBOX" in self.nerdie[server.id][user.id]:
+                    xbox = self.nerdie[server.id][user.id]["XBOX"]
+                    data.add_field(name="XBOX", value=xbox)
+                else:
+                    pass
+                if user.avatar_url:
+                    name = str(user)
+                    name = " ~ ".join((name, user.nick)) if user.nick else name
+                    data.set_author(name=name, url=user.avatar_url)
+                    data.set_thumbnail(url=user.avatar_url)
+                else:
+                    data.set_author(name=user.name)
 
                 await self.bot.say(embed=data)
             else:
