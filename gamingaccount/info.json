@@ -1,0 +1,12 @@
+{
+   "AUTHOR":"failgod",
+   "SHORT":"The GamingAccount Cog",
+   "DESCRIPTION":"Just an account cog with fields like psn, battlenet-id and stuff.",
+   "DISABLED":false,
+   "NAME":"GamingAccount",
+   "TAGS":[
+      "GamingAccount",
+      "Profile"
+   ],
+   "INSTALL_MSG":"You just installed **GamingAccount.py**! \nJust an account cog with fields like psn, battlenet-id, and such.\n\n**"
+}
