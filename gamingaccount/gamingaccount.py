@@ -68,7 +68,7 @@ class GamingAccount:
 
                 if "XBOX" in self.nerdie[server.id][user.id]:
                     xbox = self.nerdie[server.id][user.id]["XBOX"]
-                    data.add_field(name="XBOX", value=xbox)
+                    data.add_field(name="XBOX:", value=xbox)
                 else:
                     pass
                 if user.avatar_url:
@@ -81,7 +81,7 @@ class GamingAccount:
 
                 if "Wohnort" in self.nerdie[server.id][user.id]:
                     ort = self.nerdie[server.id][user.id]["Wohnort"]
-                    data.add_field(name="Wohnort", value=ort)
+                    data.add_field(name="Wohnort:", value=ort)
                 else:
                     pass
                 if user.avatar_url:
@@ -117,7 +117,7 @@ class GamingAccount:
 
                 if "XBOX" in self.nerdie[server.id][user.id]:
                     xbox = self.nerdie[server.id][user.id]["XBOX"]
-                    data.add_field(name="XBOX", value=xbox)
+                    data.add_field(name="XBOX:", value=xbox)
                 else:
                     pass
                 if user.avatar_url:
@@ -130,7 +130,7 @@ class GamingAccount:
 
                 if "Wohnort" in self.nerdie[server.id][user.id]:
                     ort = self.nerdie[server.id][user.id]["Wohnort"]
-                    data.add_field(name="Wohnort", value=ort)
+                    data.add_field(name="Wohnort:", value=ort)
                 else:
                     pass
                 if user.avatar_url:
