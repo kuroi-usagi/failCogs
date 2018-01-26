@@ -34,7 +34,7 @@ class GamingAccount:
             await self.bot.say(embed=data)
         else: 
             data = discord.Embed(colour=user.colour)
-            data.add_field(name="Error:Warnung:",value="Sieht so aus als hättest du schon einen Account, {}.".format(user.mention))
+            data.add_field(name="Hinweis:",value="Sieht so aus als hättest du schon einen Account, {}.".format(user.mention))
             await self.bot.say(embed=data)
         
     
@@ -96,7 +96,7 @@ class GamingAccount:
             else:
                 prefix = ctx.prefix
                 data = discord.Embed(colour=user.colour)
-                data.add_field(name="Error:Warnung:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
+                data.add_field(name="Hinweis:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
                 await self.bot.say(embed=data)
         else:
             server = ctx.message.server
@@ -144,7 +144,7 @@ class GamingAccount:
                 await self.bot.say(embed=data)
             else:
                 data = discord.Embed(colour=user.colour)
-                data.add_field(name="Error:Warnung:",value="{} hat keinen Account.".format(user.mention))
+                data.add_field(name="Fehler:",value="{} hat keinen Account.".format(user.mention))
                 await self.bot.say(embed=data)
 
     @commands.group(name="update", pass_context=True, invoke_without_command=True, no_pm=True)
@@ -167,7 +167,7 @@ class GamingAccount:
 
         if user.id not in self.nerdie[server.id]:
             data = discord.Embed(colour=user.colour)
-            data.add_field(name="Error:Warnung:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
+            data.add_field(name="Hinweis:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
             await self.bot.say(embed=data)
         else:
             self.nerdie[server.id][user.id].update({"PSN" : psn})
@@ -191,7 +191,7 @@ class GamingAccount:
 
         if user.id not in self.nerdie[server.id]:
             data = discord.Embed(colour=user.colour)
-            data.add_field(name="Error:Warnung:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
+            data.add_field(name="Hinweis:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
             await self.bot.say(embed=data)
         else:
             self.nerdie[server.id][user.id].update({"XBOX" : xbox})
@@ -215,13 +215,13 @@ class GamingAccount:
 
         if user.id not in self.nerdie[server.id]:
             data = discord.Embed(colour=user.colour)
-            data.add_field(name="Error:Warnung:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
+            data.add_field(name="Hinweis:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
             await self.bot.say(embed=data)
         else:
             self.nerdie[server.id][user.id].update({"Wohnort" : ort})
             dataIO.save_json(self.profile, self.nerdie)
             data = discord.Embed(colour=user.colour)
-            data.add_field(name="Glückwunsch!:sparkles:",value="Deine Wohnort ist jetzt {}".format(ort))
+            data.add_field(name="Glückwunsch!:sparkles:",value="Dein Wohnort ist jetzt {}".format(ort))
             await self.bot.say(embed=data)
 
 def check_folder():
