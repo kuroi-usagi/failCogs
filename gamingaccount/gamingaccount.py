@@ -65,9 +65,23 @@ class GamingAccount:
                     data.set_thumbnail(url=user.avatar_url)
                 else:
                     data.set_author(name=user.name)
+
                 if "XBOX" in self.nerdie[server.id][user.id]:
                     xbox = self.nerdie[server.id][user.id]["XBOX"]
                     data.add_field(name="XBOX", value=xbox)
+                else:
+                    pass
+                if user.avatar_url:
+                    name = str(user)
+                    name = " ~ ".join((name, user.nick)) if user.nick else name
+                    data.set_author(name=name, url=user.avatar_url)
+                    data.set_thumbnail(url=user.avatar_url)
+                else:
+                    data.set_author(name=user.name)
+
+                if "Wohnort" in self.nerdie[server.id][user.id]:
+                    ort = self.nerdie[server.id][user.id]["Wohnort"]
+                    data.add_field(name="Wohnort", value=ort)
                 else:
                     pass
                 if user.avatar_url:
@@ -100,9 +114,23 @@ class GamingAccount:
                     data.set_thumbnail(url=user.avatar_url)
                 else:
                     data.set_author(name=user.name)
+
                 if "XBOX" in self.nerdie[server.id][user.id]:
                     xbox = self.nerdie[server.id][user.id]["XBOX"]
                     data.add_field(name="XBOX", value=xbox)
+                else:
+                    pass
+                if user.avatar_url:
+                    name = str(user)
+                    name = " ~ ".join((name, user.nick)) if user.nick else name
+                    data.set_author(name=name, url=user.avatar_url)
+                    data.set_thumbnail(url=user.avatar_url)
+                else:
+                    data.set_author(name=user.name)
+
+                if "Wohnort" in self.nerdie[server.id][user.id]:
+                    ort = self.nerdie[server.id][user.id]["Wohnort"]
+                    data.add_field(name="Wohnort", value=ort)
                 else:
                     pass
                 if user.avatar_url:
@@ -170,6 +198,30 @@ class GamingAccount:
             dataIO.save_json(self.profile, self.nerdie)
             data = discord.Embed(colour=user.colour)
             data.add_field(name="Glückwunsch!:sparkles:",value="Deine Xbox Name ist jetzt {}".format(xbox))
+            await self.bot.say(embed=data)
+
+    @update.command(pass_context=True, no_pm=True)
+    async def wohnort(self, ctx, *, ort):
+        """Wo wohnst du?"""
+        
+        server = ctx.message.server
+        user = ctx.message.author
+        prefix = ctx.prefix
+
+        if server.id not in self.nerdie:
+            self.nerdie[server.id] = {}
+        else:
+            pass
+
+        if user.id not in self.nerdie[server.id]:
+            data = discord.Embed(colour=user.colour)
+            data.add_field(name="Error:Warnung:",value="Du brauchst einen Account um das nutzen zu können. \n\nUm einen anzulegen sage einfach `{}signup`.".format(prefix))
+            await self.bot.say(embed=data)
+        else:
+            self.nerdie[server.id][user.id].update({"Wohnort" : ort})
+            dataIO.save_json(self.profile, self.nerdie)
+            data = discord.Embed(colour=user.colour)
+            data.add_field(name="Glückwunsch!:sparkles:",value="Deine Wohnort ist jetzt {}".format(ort))
             await self.bot.say(embed=data)
 
 def check_folder():
