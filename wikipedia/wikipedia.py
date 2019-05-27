@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 from cogs.utils import checks
 from __main__ import send_cmd_help
-from .utils.dataIO import dataIO
+from redbot.utils.dataIO import dataIO
 
 
 class Wikipedia:

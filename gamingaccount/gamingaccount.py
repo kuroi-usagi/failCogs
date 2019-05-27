@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
-from .utils.dataIO import dataIO
-from .utils import checks
+from redbot.utils.dataIO import dataIO
+from redbot.utils import checks
 from __main__ import send_cmd_help
 import os
-from .utils.chat_formatting import *
+from redbot.utils.chat_formatting import *
 
 class GamingAccount:
     """The GamingAccount Cog"""
